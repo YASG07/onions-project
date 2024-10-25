@@ -1,10 +1,14 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid, Flex, Avatar } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid, Flex } from '@chakra-ui/react';
 import { ChakraProvider, Box, Grid, GridItem } from "@chakra-ui/react";
 import React, { useState } from 'react'
 import PlantCard from '../components/PlantCard';
+import SubirImagen from '../components/SubirImagen';
+import InfoAvatar from '../components/InfoAvatar';
+import AcercaDe from '../components/AcercaDe';
 
 const HomePage = () => {
     const [tabIndex, setTabIndex] = useState(0);
+
     return (
         <ChakraProvider>
             <Grid
@@ -22,10 +26,10 @@ const HomePage = () => {
                             <TabList>
                                 <Tab>Mis Plantas</Tab>
                                 <Tab>PlantIA</Tab>
+                                <Tab>Acerca de</Tab>
                             </TabList>
-
                         </Tabs>
-                        <Avatar name="User Name" src="https://bit.ly/broken-link" />
+                        <InfoAvatar name="Planta" src="https://bit.ly/broken-link"/>
                     </Flex>
                 </GridItem>
 
@@ -33,17 +37,21 @@ const HomePage = () => {
                     <Tabs>
                         <TabPanels>
                             {tabIndex === 0 && <TabPanel>
-                                <SimpleGrid columns={[1, null, 3]} spacing="20px">
+                                <SimpleGrid minChildWidth="300px" spacing="20px" width="100%">
                                     <PlantCard title="Planta 1" image="https://via.placeholder.com/150"/>
                                     <PlantCard title="Planta 2" image="https://via.placeholder.com/150"/>
-                                    <PlantCard title="Planta 3" image="https://via.placeholder.com/150"/>
+                                    <PlantCard title="Planta 3" image="https://via.placeholder.com/150"/>   
                                 </SimpleGrid>
                             </TabPanel>}
-                            {tabIndex === 1 && <TabPanel><Box>Aqui va la wea de lens </Box></TabPanel>}
+                            {tabIndex === 1 && <TabPanel>
+                                <SubirImagen/>
+                            </TabPanel>}
+                            {tabIndex === 2 && <TabPanel>
+                                <AcercaDe/> 
+                            </TabPanel>}
                         </TabPanels>
                     </Tabs>
                 </GridItem>
-
             </Grid>
         </ChakraProvider>
     );
