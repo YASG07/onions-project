@@ -1,12 +1,20 @@
-# Project Zero (nombre provisional)
+# PlantIA
 
-Plataforma web dedicada a compartir información sobre plantas de diferentes tipos, principalmente los cuidados y acciones recomendados dependiendo la especie. Esta plataforma también incluye el uso de herramientas de machine learning.
+Plataforma web dedicada a cumplir la función de catálogo de plantas, para aquellos aficionados del cuidado de plantas tengan un mejor control sobre su jardín. 
 
 ## Antes de comenzar
 
-Tras descargar el repositorio en el directorio de descarga ejecutar el siguiente comando:
+Tras descargar el repositorio en el directorio de descarga ejecutar los siguientes comando:
 ```bash
 npm install
+```
+
+## Ejecutar
+
+Cuando haya terminado de descargar las dependencias lanzar el comando:
+
+```bash
+npm run dev
 ```
 
 ## Hecho con:
@@ -20,4 +28,4 @@ npm install
 * Plata Cabello José Manuel
 * Sandoval García Yael Alejandro
 
-**Si algo sale mal no nos hacemos responsables de los perjuicios a la PC en cuestión**
+**El que se robe la API Key de Firebase es de industrial**
