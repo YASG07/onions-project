@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 import '../../components/Styles/SignUpPage.css';
-import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
-import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
-import { auth, db } from '../../../../client';
+import { createUserWithEmailAndPassword, updateProfile} from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
+import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
+import { auth } from '../../../../client';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
 
 const SignUp = () => {
+    let navigate = useNavigate()
     const [formData, setFormData] = useState({
         fullName: '', email: '', password: ''
     });
@@ -20,23 +23,46 @@ const SignUp = () => {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            // Asegurarse de que todos los campos están definidos
+            //! Asegurarse de que todos los campos están definidos
             if (!formData.fullName || !formData.email || !formData.password) {
                 throw new Error("Todos los campos son obligatorios");
             }
 
+            
+            //! Crear el usuario en Firebase Authentication 
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             const user = userCredential.user;
 
-            // Agregar documento a Firestore
-            const usersCollectionRef = collection(db, 'users');
-            await addDoc(usersCollectionRef, {
+            //! Actualizar el perfil del usuario con el nombre completo 
+            await updateProfile(user, { displayName: formData.fullName });
+
+            //! Agregar documento a Database
+            const db = getDatabase();
+            const newUserRef = ref(db, 'users/' + user.uid);
+            await set(newUserRef, {
                 uid: user.uid,
-                name: formData.fullName,
+                displayName: formData.fullName,
                 email: formData.email,
             });
 
             alert("Usuario registrado con éxito");
+            console.log(db);
+
+            //! Iniciar sesion despues de crear el usuario
+            try {
+                const { data, error } = await signInWithEmailAndPassword(
+                    auth,
+                    formData.email,
+                    formData.password,
+                )
+                if (error) throw error
+                console.log(data)
+                navigate('/homepage')
+            } catch (error) {
+                alert(error)
+            }
+
+            
         } catch (error) {
             console.error("Error al registrar usuario: ", error);
             alert(error.message);
