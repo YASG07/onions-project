@@ -1,7 +1,9 @@
-import { ChakraProvider, Box, Heading, Avatar, 
-    Text, Stack, Button, HStack, VStack, Divider, 
-    Modal, useDisclosure,ModalOverlay,
-    ModalContent } from '@chakra-ui/react';
+import {
+    ChakraProvider, Box, Heading, Avatar,
+    Text, Stack, Button, HStack, VStack, Divider,
+    Modal, useDisclosure, ModalOverlay,
+    ModalContent, ModalCloseButton
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
@@ -43,6 +45,11 @@ const Profile = ({ user }) => {
                         setUsername(username);
                         const email = (snapshot.val() && snapshot.val().email) || 'No email';
                         setEmail(email);
+                        const bio = (snapshot.val() && snapshot.val().description) || 'No hay una descripcion';
+                        setBio(bio);
+                        const ubicacion = (snapshot.val() && snapshot.val().ubication)
+                            || 'No hay una ubicación';
+                        setUbi(ubicacion);
                     } catch (error) {
                         console.error("Error al obtener los datos:", error);
                     }
@@ -71,9 +78,7 @@ const Profile = ({ user }) => {
                     <Text fontSize="lg" color="gray.600">{email}</Text>
                     <Text fontSize="md" textAlign="center">{bio}</Text>
                 </VStack>
-
                 <Divider my={6} />
-
                 {/* Detalles Adicionales */}
                 <Stack direction={{ base: 'column', md: 'row' }} spacing={8} alignItems="center">
                     <Box textAlign="center">
@@ -85,7 +90,6 @@ const Profile = ({ user }) => {
                         <Text fontWeight="bold">Miembro Desde</Text>
                         <Text fontSize="lg" color="gray.600">{member}</Text>
                     </Box>
-
                     <Box textAlign="center">
                         <Text fontWeight="bold">Ubicación</Text>
                         <Text fontSize="lg" color="gray.600">{ubicacion}</Text>
@@ -101,6 +105,7 @@ const Profile = ({ user }) => {
                         <ModalOverlay />
                         <ModalContent>
                             <FormularioActualizarDatosUsuario />
+                            <ModalCloseButton />
                         </ModalContent>
                     </Modal>
                     <Button colorScheme="red" onClick={handleLogout}>Cerrar Sesión</Button>
