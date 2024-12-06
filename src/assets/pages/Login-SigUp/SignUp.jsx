@@ -10,7 +10,8 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 const SignUp = () => {
     let navigate = useNavigate()
     const [formData, setFormData] = useState({
-        fullName: '', email: '', password: ''
+        fullName: '', email: '', password: '',
+        description: '', ubication: ''
     });
 
     function handleChange(event) {
@@ -28,7 +29,6 @@ const SignUp = () => {
                 throw new Error("Todos los campos son obligatorios");
             }
 
-            
             //! Crear el usuario en Firebase Authentication 
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             const user = userCredential.user;
@@ -43,6 +43,8 @@ const SignUp = () => {
                 uid: user.uid,
                 displayName: formData.fullName,
                 email: formData.email,
+                description: formData.description,
+                ubication: formData.ubication
             });
 
             alert("Usuario registrado con éxito");

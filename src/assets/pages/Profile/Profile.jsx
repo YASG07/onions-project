@@ -1,16 +1,21 @@
-import { ChakraProvider, Box, Heading, Avatar, Text, Stack, Button, HStack, VStack, Divider, useRadio } from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, Avatar, 
+    Text, Stack, Button, HStack, VStack, Divider, 
+    Modal, useDisclosure,ModalOverlay,
+    ModalContent } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
 import { auth } from '../../../../client';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import FormularioActualizarDatosUsuario from '../../components/FormularioActualizarDatosUsuario';
+
 
 
 const Profile = ({ user }) => {
     let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
     //faltan por hacer
     const [bio, setBio] = useState('');
     const [countPlants, setCount] = useState('');
@@ -24,6 +29,7 @@ const Profile = ({ user }) => {
     function handleBack() {
         navigate('/homepage')
     }
+
 
     useEffect(() => {
         const db = getDatabase();
@@ -90,7 +96,13 @@ const Profile = ({ user }) => {
 
                 {/* Botones de Acción */}
                 <HStack justifyContent="center" spacing={6}>
-                    <Button colorScheme="blue">Editar Perfil</Button>
+                    <Button colorScheme="blue" onClick={onOpen}>Editar Perfil</Button>
+                    <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <FormularioActualizarDatosUsuario />
+                        </ModalContent>
+                    </Modal>
                     <Button colorScheme="red" onClick={handleLogout}>Cerrar Sesión</Button>
                     <Button colorScheme='green' onClick={handleBack}>Volver</Button>
                 </HStack>
