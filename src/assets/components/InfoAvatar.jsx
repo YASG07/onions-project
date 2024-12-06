@@ -15,7 +15,7 @@ const InfoAvatar = ({ name, src }) => {
     }
     return (
         <>
-            <Avatar name={name} src={src} onClick={onOpen} />
+            <Avatar name={name} src={src} onClick={onOpen} cursor='pointer'/>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

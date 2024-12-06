@@ -41,6 +41,7 @@ const Login = () => {
 
     return (
         <div className="login-container">
+            <h1>PlantIA</h1>
             <div className="login-content">
                 <h2>Inicia sesión</h2>
                 <form onSubmit={handleSubmit}>
@@ -62,7 +63,7 @@ const Login = () => {
                     />
                     <button type="submit">Ingresar</button>
                 </form>
-                <p>¿No tienes cuenta? <Link to="/signup">Regístrate</Link></p>
+                <p className='register'>¿No tienes cuenta? <Link to="/signup">Regístrate</Link></p>
             </div>
         </div>
     );
