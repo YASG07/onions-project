@@ -69,7 +69,7 @@ const SubirImagen = () => {
           {selectedImage ? (
             <Image src={selectedImage} alt="Preview" maxH="200px" mx="auto" borderRadius="md" />
           ) : (
-            <Text color="gray.500">
+            <Text color="#d4d4d4">
                 Arrastra y suelta una imagen aquí, o haz click en el botón para seleccionar una
             </Text>
           )}

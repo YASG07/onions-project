@@ -1,14 +1,15 @@
 import { Box, Image, Heading, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
+import '../components/Styles/homePage.css'
 
 const PlantCard = ({ title, image, description }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <Box maxW="300px" maxH="360px" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={onOpen} cursor="pointer">
-                <Image src={image} alt={title} boxSize="300px" objectFit="cover" />
-                <Box p="6">
+            <Box className="plant-card" onClick={onOpen} >
+                <Image className="plant-card"  src={image} alt={title} />
+                <Box className="plant-info">
                     <Heading size="md" mb="2">{title}</Heading>
                 </Box>
             </Box>

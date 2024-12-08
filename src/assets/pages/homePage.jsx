@@ -5,6 +5,7 @@ import PlantCard from '../components/PlantCard';
 import SubirImagen from '../components/SubirImagen';
 import InfoAvatar from '../components/InfoAvatar';
 import AcercaDe from '../components/AcercaDe';
+import '../components/Styles/homePage.css'
 
 const HomePage = () => {
     const [tabIndex, setTabIndex] = useState(0);
@@ -17,23 +18,22 @@ const HomePage = () => {
                 gridTemplateColumns={'1px'}
                 h='200px'
                 gap='1'
-                color='blackAlpha.700'
                 fontWeight='bold'
             >
-                <GridItem pl='2' bg='orange.300' area={'header'}>
+                <GridItem className="header" bg="#1a1a1a" color="#d4d4d4" area={'header'}>
                     <Flex justify="space-between" align="center" px={4} height="100%">
                         <Tabs onChange={(index) => setTabIndex(index)} variant="enclosed" >
                             <TabList>
-                                <Tab>Mis Plantas</Tab>
-                                <Tab>PlantIA</Tab>
-                                <Tab>Acerca de</Tab>
+                                <Tab className="tab tab-active" fontSize={18}>Mis Plantas</Tab>
+                                <Tab className="tab" fontSize={18}>PlantIA</Tab>
+                                <Tab className="tab" fontSize={18}>Acerca de</Tab>
                             </TabList>
                         </Tabs>
                         <InfoAvatar name="Planta" src="https://bit.ly/broken-link"/>
                     </Flex>
                 </GridItem>
 
-                <GridItem area={'main'} p={4}>
+                <GridItem className='fondo' area={'main'} p={4}>
                     <Tabs>
                         <TabPanels>
                             {tabIndex === 0 && <TabPanel>
@@ -52,6 +52,7 @@ const HomePage = () => {
                         </TabPanels>
                     </Tabs>
                 </GridItem>
+              
             </Grid>
         </ChakraProvider>
     );

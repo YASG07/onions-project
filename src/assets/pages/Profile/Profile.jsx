@@ -10,6 +10,7 @@ import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10
 import { auth } from '../../../../client';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import FormularioActualizarDatosUsuario from '../../components/FormularioActualizarDatosUsuario';
+import '../../components/Styles/Profile.css'
 
 
 
@@ -67,32 +68,32 @@ const Profile = ({ user }) => {
 
     return (
         <ChakraProvider>
-            <Box maxW="800px" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
+            <Box className='perfil'>
                 {/* Información del Usuario */}
-                <VStack spacing={6}>
+                <VStack>
                     {/* Avatar y Nombre */}
                     <Avatar size="2xl" name={username} src={user.avatarUrl} />
-                    <Heading as="h2" size="lg">{username}</Heading>
+                    <Heading className='Nombre'>{username}</Heading>
 
                     {/* Información Básica */}
-                    <Text fontSize="lg" color="gray.600">{email}</Text>
-                    <Text fontSize="md" textAlign="center">{bio}</Text>
+                    <Text className='correo'>{email}</Text>
+                    <Text className='descripcion'>{bio}</Text>
                 </VStack>
                 <Divider my={6} />
                 {/* Detalles Adicionales */}
                 <Stack direction={{ base: 'column', md: 'row' }} spacing={8} alignItems="center">
                     <Box textAlign="center">
-                        <Text fontWeight="bold">Número de Plantas</Text>
-                        <Text fontSize="lg" color="gray.600">{countPlants}</Text>
+                        <Text className='til'>Número de Plantas</Text>
+                        <Text className='nose'>{countPlants}</Text>
                     </Box>
 
                     <Box textAlign="center">
-                        <Text fontWeight="bold">Miembro Desde</Text>
-                        <Text fontSize="lg" color="gray.600">{member}</Text>
+                        <Text className='til'>Miembro Desde</Text>
+                        <Text className='nose'>{member}</Text>
                     </Box>
                     <Box textAlign="center">
-                        <Text fontWeight="bold">Ubicación</Text>
-                        <Text fontSize="lg" color="gray.600">{ubicacion}</Text>
+                        <Text className='til'>Ubicación</Text>
+                        <Text className='nose'>{ubicacion}</Text>
                     </Box>
                 </Stack>
 
