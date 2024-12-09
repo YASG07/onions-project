@@ -20,7 +20,7 @@ const PlantCard = ({ title, image, description }) => {
                     <ModalHeader>{title}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Image src={image} alt={title} />
+                        <Image src={image} alt={title}/>
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme="blue" mr={3} onClick={onClose}>
