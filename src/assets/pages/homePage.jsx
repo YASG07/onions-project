@@ -1,10 +1,10 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid, Flex } from '@chakra-ui/react';
-import { ChakraProvider, Box, Grid, GridItem } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid, Flex, Button, Text, VStack } from '@chakra-ui/react';
+import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
 import React, { useState } from 'react'
 import PlantCard from '../components/PlantCard';
-import SubirImagen from '../components/SubirImagen';
 import InfoAvatar from '../components/InfoAvatar';
 import AcercaDe from '../components/AcercaDe';
+import FavoritosLogin from '../components/favoritosLogin';
 import '../components/Styles/homePage.css'
 
 const HomePage = () => {
@@ -44,7 +44,7 @@ const HomePage = () => {
                                 </SimpleGrid>
                             </TabPanel>}
                             {tabIndex === 1 && <TabPanel>
-                                <SubirImagen/>
+                                <FavoritosLogin/>
                             </TabPanel>}
                             {tabIndex === 2 && <TabPanel>
                                 <AcercaDe/> 

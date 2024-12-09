@@ -26,11 +26,11 @@ const Profile = ({ user }) => {
     const [ubicacion, setUbi] = useState('');
 
     function handleLogout() {
-        navigate('/')
+        navigate('/login')
     }
 
     function handleBack() {
-        navigate('/homepage')
+        navigate('/')
     }
 
 

@@ -59,7 +59,7 @@ const SignUp = () => {
                 )
                 if (error) throw error
                 console.log(data)
-                navigate('/homepage')
+                navigate('/')
             } catch (error) {
                 alert(error)
             }
@@ -102,7 +102,7 @@ const SignUp = () => {
                     />
                     <button type="submit">Enviar</button>
                 </form>
-                <p>¿Ya tienes una cuenta? <Link to="/">Ingresar</Link></p>
+                <p>¿Ya tienes una cuenta? <Link to="/login">Ingresar</Link></p>
             </div>
         </div>
     );

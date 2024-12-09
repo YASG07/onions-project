@@ -23,9 +23,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path={'/'} element={<Login/>} />
+        <Route path={'/'} element={<HomePage/>} />
         <Route path={'/signup'} element={<SignUp/>} />
-        <Route path={'/homepage'} element={<HomePage/>}/>
+        <Route path={'/login'} element={<Login/>}/>
         <Route path={'/profile'} element={<Profile user={user}/>} />
       </Routes>
     </div>

@@ -11,7 +11,7 @@ const InfoAvatar = ({ name, src }) => {
     }
 
     function handleLogout(){
-        navigate('/')
+        navigate('/login')
     }
     return (
         <>

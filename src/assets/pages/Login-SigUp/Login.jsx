@@ -30,7 +30,7 @@ const Login = () => {
             )
             const user = userCredential.user;
             console.log('User signed in:', user);
-            navigate('/homepage')
+            navigate('/')
         } catch (error) {
             console.error('Error signing in:', error);
             alert(error.message);
