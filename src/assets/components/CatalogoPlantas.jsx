@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import PlantCard from '../components/PlantCard';
 import '../components/Styles/homePage.css';
 
-const CatalogoPlantas = () => {
+const CatalogoPlantas = ({ buked, favorite }) => {
     const [plants, setPlants] = useState([]);
     const [page, setPage] = useState(1); // Estado para la página actual
     const PLANTS_PER_PAGE = 15; // Número de elementos por página
@@ -16,7 +16,7 @@ const CatalogoPlantas = () => {
 
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
-                const plantasRef = ref(db, '/plantas/plantas');
+                const plantasRef = ref(db, buked);
                 await onValue(plantasRef, (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
@@ -75,13 +75,14 @@ const CatalogoPlantas = () => {
                             plantsToShow.map((plant) => (
                                 <PlantCard
                                     key={plant.id}
-                                    title={plant.common_name || 'Nombre Desconocido'}
-                                    image={plant.default_image?.medium_url || 'https://png.pngtree.com/png-clipart/20230916/original/pngtree-sticker-with-a-cute-little-yellow-plant-in-a-pot-vector-png-image_12228899.png'}
+                                    common_name={plant.common_name || 'Nombre Desconocido'}
+                                    default_image={plant.default_image?.medium_url || plant.default_image?.original_url || plant.default_image ||'https://png.pngtree.com/png-clipart/20230916/original/pngtree-sticker-with-a-cute-little-yellow-plant-in-a-pot-vector-png-image_12228899.png'}
                                     scientific_name={plant.scientific_name}
                                     other_name={plant.other_name}
                                     cycle={plant.cycle}
                                     watering={plant.watering}
                                     sunlight={plant.sunlight}
+                                    favorite={favorite}
                                 />
                             ))
                         ) : (

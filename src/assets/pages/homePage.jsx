@@ -1,15 +1,30 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid, Flex, Button, Text, VStack } from '@chakra-ui/react';
 import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
-import React, { useState } from 'react'
-import PlantCard from '../components/PlantCard';
+import React, { useEffect, useState } from 'react'
 import InfoAvatar from '../components/InfoAvatar';
 import AcercaDe from '../components/AcercaDe';
 import FavoritosLogin from '../components/favoritosLogin';
 import '../components/Styles/homePage.css'
 import CatalogoPlantas from '../components/CatalogoPlantas';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { auth } from '../../../client';
 
 const HomePage = () => {
     const [tabIndex, setTabIndex] = useState(0);
+    const [userId, setUserId] = useState("");
+
+    useEffect(() => {
+
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (!currentUser) {
+                console.error('No user is authenticated');
+            } 
+            setUserId(currentUser.uid)
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, []);
 
     return (
         <ChakraProvider>
@@ -39,17 +54,13 @@ const HomePage = () => {
                     <Tabs>
                         <TabPanels>
                             {tabIndex === 0 && <TabPanel>
-                                <SimpleGrid minChildWidth="300px" spacing="20px" width="100%">
-                                    <PlantCard title="Planta 1" image="https://via.placeholder.com/150"/>
-                                    <PlantCard title="Planta 2" image="https://via.placeholder.com/150"/>
-                                    <PlantCard title="Planta 3" image="https://via.placeholder.com/150"/>   
-                                </SimpleGrid>
+                                <CatalogoPlantas buked={`users/${userId}/favorites`} favorite={true}/>
                             </TabPanel>}
                             {tabIndex === 1 && <TabPanel>
                                 <FavoritosLogin/>
                             </TabPanel>}
                             {tabIndex === 2 && <TabPanel>
-                                <CatalogoPlantas/> 
+                                <CatalogoPlantas buked='/plantas/plantas'/> 
                             </TabPanel>}
                             {tabIndex === 3 && <TabPanel>
                                 <AcercaDe/> 
