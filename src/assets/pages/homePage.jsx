@@ -6,6 +6,7 @@ import InfoAvatar from '../components/InfoAvatar';
 import AcercaDe from '../components/AcercaDe';
 import FavoritosLogin from '../components/favoritosLogin';
 import '../components/Styles/homePage.css'
+import CatalogoPlantas from '../components/CatalogoPlantas';
 
 const HomePage = () => {
     const [tabIndex, setTabIndex] = useState(0);
@@ -26,6 +27,7 @@ const HomePage = () => {
                             <TabList>
                                 <Tab className="tab tab-active" fontSize={18}>Mis Plantas</Tab>
                                 <Tab className="tab" fontSize={18}>PlantIA</Tab>
+                                <Tab className='tab' fontSize={18}>Catalogo de plantas</Tab>
                                 <Tab className="tab" fontSize={18}>Acerca de</Tab>
                             </TabList>
                         </Tabs>
@@ -47,6 +49,9 @@ const HomePage = () => {
                                 <FavoritosLogin/>
                             </TabPanel>}
                             {tabIndex === 2 && <TabPanel>
+                                <CatalogoPlantas/> 
+                            </TabPanel>}
+                            {tabIndex === 3 && <TabPanel>
                                 <AcercaDe/> 
                             </TabPanel>}
                         </TabPanels>
