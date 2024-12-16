@@ -8,10 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
 import { auth } from '../../../../client';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import FormularioActualizarDatosUsuario from '../../components/FormularioActualizarDatosUsuario';
 import '../../components/Styles/Profile.css'
-
 
 
 const Profile = ({ user }) => {
@@ -25,7 +24,8 @@ const Profile = ({ user }) => {
     const [member, setMember] = useState('');
     const [ubicacion, setUbi] = useState('');
 
-    function handleLogout() {
+    async function handleLogout() {
+        await signOut(auth)
         navigate('/login')
     }
 

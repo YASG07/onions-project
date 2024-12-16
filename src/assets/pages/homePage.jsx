@@ -41,7 +41,6 @@ const HomePage = () => {
                         <Tabs onChange={(index) => setTabIndex(index)} variant="enclosed" >
                             <TabList>
                                 <Tab className="tab tab-active" fontSize={18}>Mis Plantas</Tab>
-                                <Tab className="tab" fontSize={18}>PlantIA</Tab>
                                 <Tab className='tab' fontSize={18}>Catalogo de plantas</Tab>
                                 <Tab className="tab" fontSize={18}>Acerca de</Tab>
                             </TabList>
@@ -54,15 +53,16 @@ const HomePage = () => {
                     <Tabs>
                         <TabPanels>
                             {tabIndex === 0 && <TabPanel>
-                                <CatalogoPlantas buked={`users/${userId}/favorites`} favorite={true}/>
+                                {userId ? (
+                                    <CatalogoPlantas buked={`users/${userId}/favorites`} favorite={true}/>
+                                ) : (
+                                    <FavoritosLogin/>
+                                )}
                             </TabPanel>}
                             {tabIndex === 1 && <TabPanel>
-                                <FavoritosLogin/>
-                            </TabPanel>}
-                            {tabIndex === 2 && <TabPanel>
                                 <CatalogoPlantas buked='/plantas/plantas'/> 
                             </TabPanel>}
-                            {tabIndex === 3 && <TabPanel>
+                            {tabIndex === 2 && <TabPanel>
                                 <AcercaDe/> 
                             </TabPanel>}
                         </TabPanels>

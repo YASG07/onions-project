@@ -1,4 +1,4 @@
-import { Tabs, TabPanels, TabPanel, SimpleGrid, Button, Flex } from '@chakra-ui/react';
+import { Tabs, TabPanels, TabPanel, SimpleGrid, Button, Flex, Text } from '@chakra-ui/react';
 import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
 import { auth } from '../../../client';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
@@ -86,7 +86,9 @@ const CatalogoPlantas = ({ buked, favorite }) => {
                                 />
                             ))
                         ) : (
-                            <p>Cargando...</p>
+                            <Text color="white" fontSize="x-large" align="center">
+                                Cargando...
+                            </Text>
                         )}
                     </SimpleGrid>
                 </TabPanel>

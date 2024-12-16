@@ -1,16 +1,24 @@
 import { Avatar, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalCloseButton, Button, useDisclosure, GenericAvatarIcon, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
+import { signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { auth } from '../../../client';
 
 const InfoAvatar = ({ name, src }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate()
 
     function handleProfile() {
-        navigate('/profile')
+        if(auth.currentUser){
+            navigate('/profile') 
+        }
+        else {
+            alert("Inicia sesión para consultar este apartado.")
+        }
     }
 
-    function handleLogout(){
+    async function handleLogout(){
+        await signOut(auth)
         navigate('/login')
     }
     return (
